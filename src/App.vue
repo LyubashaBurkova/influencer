@@ -1,28 +1,61 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="home">
+    <span v-if="loading">Loading…</span>
+    <ul
+      v-else
+      class="posts"
+    >
+      <li
+        v-for="post in posts"
+        :key="post.title"
+        class="post-item"
+      >
+          <h1>{{ post.title }}</h1>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      loading: false
+    }
+  },
+
+  computed: {
+    posts () {
+      console.log(this.$store.state.posts)
+      return this.$store.state.posts
+    }
+  },
+
+  created () {
+    this.loading = true
+    this.$store.dispatch('fetchPosts')
+      .then(posts => {
+        console.log(posts)
+        this.loading = false
+      })
   }
+  // created () {
+  //   fetch ('https://jsonplaceholder.typicode.com/posts')
+  //   .then(post => {
+  //     console.log(post)
+  //     return post.json()
+  //   })
+  // }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.posts {
+  list-style: none;
+  text-align: left;
+}
+
+.post-item + .post-item {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 </style>
