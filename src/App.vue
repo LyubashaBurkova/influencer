@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container class="mt-4">
-      <b-row class="header">
+      <b-row class="header pb-3">
         <b-col></b-col>
         <b-col @click="sortingList('followers')">Подписчиков</b-col>
         <b-col @click="sortingList('er')">Подписок</b-col>
@@ -57,7 +57,8 @@ export default {
 
 <style scoped>
 .header div {
-  cursor:pointer;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .col,
@@ -70,7 +71,7 @@ export default {
   border-bottom: 1px solid #ddd
 }
 
-.row:hover {
+.row:hover:not(.header) {
   background-color: #ddd;
 }
 </style>
