@@ -13,6 +13,8 @@
           <h1>{{ post.title }}</h1>
       </li>
     </ul>
+    {{influencers}}
+    {{fields}}
   </div>
 </template>
 
@@ -26,16 +28,34 @@ export default {
 
   computed: {
     posts () {
-      console.log(this.$store.state.posts)
+      console.log('ap  posts', this.$store.state.posts)
       return this.$store.state.posts
-    }
+    },
+    fields () {
+      console.log('ap  fields', this.$store.state.fields)
+      return this.$store.state.fields
+    },
+    influencers () {
+      console.log('app influencers', this.$store.state.influencers)
+      return this.$store.state.influencers
+    },
   },
 
   created () {
     this.loading = true
     this.$store.dispatch('fetchPosts')
       .then(posts => {
-        console.log(posts)
+        console.log('postp', posts)
+        this.loading = false
+      })
+    this.$store.dispatch('fetchFields')
+      .then(fields => {
+        console.log('fieldas', fields)
+        this.loading = false
+    })
+    this.$store.dispatch('fetchInfluencers')
+      .then(influencers => {
+        console.log('getInfluencers', influencers)
         this.loading = false
       })
   }

@@ -5,7 +5,7 @@ module.exports = {
     // const apiClient = //process.env.VUE_APP_API_CLIENT // mock or server
     config.resolve.alias.set(
       'api-client',
-      path.resolve(__dirname, `src/api/mock`) // ${apiClient}`)
+      path.resolve(__dirname, `src/api/mock`) // ${apiClient}`)  `src/api/mock`
     )
   }
 }
