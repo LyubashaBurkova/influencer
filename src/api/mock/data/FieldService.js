@@ -1,14 +1,4 @@
-//import Influencer from '../../models/Influencer';
-import posts from './post'
 import Vue from 'vue'
-
-const fetch = (mockData, time = 0) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(mockData)
-    }, time)
-  })
-}
 
 class Influencer {
     constructor(args) {
@@ -79,7 +69,6 @@ export default class FieldService extends Vue {
      * @returns {Promise<Array<Influencer>>}
      */
     getInfluencers() {
-        console.log('getInfluencers')
         return new Promise(resolve => {
             setTimeout(() => {
                 const clonedInfluencers = this.influencers.map(influencer => influencer);
@@ -111,14 +100,5 @@ export default class FieldService extends Vue {
                 resolve(clonedInfluencer);
             }, 10);
         });
-    }
-
-    fetchPosts () {
-        console.log('fetchPosts')
-        return fetch(posts, 0) // wait 1s before returning posts
-    }
-    
-    fetchInfluencers () {
-        return this.getInfluencers()
     }
 }
